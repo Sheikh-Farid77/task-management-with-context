@@ -1,9 +1,14 @@
+import { useTasks } from "../../context/ContextProvider";
+
 export default function TaskSearch() {
+
+  const {handleSearchValue} = useTasks();
   return (
     <form>
       <div className="flex">
         <div className="relative overflow-hidden rounded-lg text-gray-50 md:min-w-[380px] lg:min-w-[440px]">
           <input
+          onChange={handleSearchValue}
             type="search"
             id="search-dropdown"
             className="z-20 block w-full bg-gray-800 px-4 py-2 pr-10 focus:outline-none disabled:bg-gray-500"

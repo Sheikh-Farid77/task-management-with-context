@@ -1,16 +1,21 @@
 import { useTasks } from "../../context/ContextProvider";
+import NotFound from "../../ui/NotFound";
 import ActionModal from "./ActionModal";
 import TaskHeader from "./TaskHeader";
+import Tasks from "./Tasks";
 
 export default function TaskContainer() {
   const {
     tasks,
     showModal,
-    handleShowModal,
     currentTask,
     handleCurrentTask,
     searchValue,
   } = useTasks() || {};
+
+
+  const filteredTasks = tasks?.filter(task => task.title.toLowerCase().includes(searchValue?.toLowerCase()));
+ 
 
   return (
     <section className="mb-20 !bg-[#191D26]" id="tasks">
@@ -19,6 +24,17 @@ export default function TaskContainer() {
           {/* render the task header */}
           <TaskHeader />
           {showModal && <ActionModal />}
+
+
+          {
+            filteredTasks.length > 0 ? (
+              <Tasks filteredTasks = {filteredTasks}  />
+            ) : (
+              <NotFound />
+            )
+          }
+
+
         </div>
       </div>
     </section>
